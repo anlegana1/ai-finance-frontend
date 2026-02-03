@@ -1,0 +1,269 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: #111827;
+  background-color: #0b1220;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(59, 130, 246, 0.25), transparent 60%),
+    radial-gradient(900px 500px at 80% 20%, rgba(16, 185, 129, 0.18), transparent 55%),
+    #0b1220;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 640px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+h2, h3 {
+  margin-top: 0;
+}
+
+.container {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.container.wide {
+  max-width: 1100px;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 48px 16px;
+  }
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .topbar h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: 18px;
+  }
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.input {
+  border-radius: 10px;
+  border: 1px solid rgba(17, 24, 39, 0.15);
+  padding: 10px 12px;
+  font-size: 1rem;
+  background: white;
+  color: #111827;
+}
+
+.textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(17, 24, 39, 0.15);
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  background: white;
+  color: #111827;
+}
+
+.button {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.button.secondary {
+  background: rgba(255, 255, 255, 0.35);
+  color: #111827;
+  border-color: rgba(17, 24, 39, 0.15);
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #991b1b;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.muted {
+  color: rgba(17, 24, 39, 0.65);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.row > div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  border-radius: 999px;
+  border: 1px solid rgba(17, 24, 39, 0.15);
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.4);
+  color: #111827;
+  cursor: pointer;
+  font-weight: 700;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  touch-action: manipulation;
+}
+
+.tab.active {
+  background: #111827;
+  color: white;
+  border-color: #111827;
+}
+
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tableWrap {
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .table th,
+  .table td {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: rgba(249, 250, 251, 0.98);
+  font-weight: 700;
+}
+
+.table input,
+.table select {
+  min-width: 80px;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .table input,
+  .table select {
+    font-size: 1rem;
+  }
+}
+
+.section {
+  margin-top: 16px;
+}
