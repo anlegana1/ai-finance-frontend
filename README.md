@@ -93,8 +93,32 @@ src/
 Create a `.env` file in the frontend directory if needed for API endpoints:
 
 ```env
-VITE_API_URL=your_backend_api_url
+VITE_API_BASE_URL=http://localhost:8000
 ```
+
+### Production (Vercel) API Proxy
+
+This frontend uses a Vercel rewrite proxy so API calls are same-origin in production:
+
+- Frontend calls: `/api/auth/login`, `/api/auth/me`, etc.
+- Vercel proxies to the Render backend.
+
+This avoids third-party cookie issues on mobile browsers when using HttpOnly cookies.
+
+Files involved:
+- `vercel.json` (rewrites `/api/:path*` → Render backend)
+- `src/lib/api.js` (defaults `API_BASE_URL` to `/api`)
+
+If you set `VITE_API_BASE_URL` in Vercel, make sure it does not point directly to Render; otherwise the proxy is bypassed.
+
+## 🔐 Authentication (HttpOnly Cookie)
+
+Authentication uses an HttpOnly cookie instead of storing tokens in `localStorage`.
+
+- `POST /auth/login` sets `Set-Cookie: access_token=<jwt>; HttpOnly`
+- The browser sends the cookie automatically on subsequent API calls.
+- The frontend uses `credentials: 'include'` in `fetch`.
+- `ProtectedRoute` calls `GET /auth/me` to check if the user is authenticated.
 
 ## 📝 Available Scripts
 
