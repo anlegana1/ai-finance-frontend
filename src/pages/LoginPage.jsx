@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { API_BASE_URL } from '../lib/api'
 
@@ -6,8 +6,33 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [checkingSession, setCheckingSession] = useState(true)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+
+  useEffect(() => {
+    let cancelled = false
+
+    async function checkSession() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/auth/me`, {
+          method: 'GET',
+          credentials: 'include',
+        })
+
+        if (!cancelled && res.ok) {
+          navigate('/', { replace: true })
+        }
+      } finally {
+        if (!cancelled) setCheckingSession(false)
+      }
+    }
+
+    checkSession()
+    return () => {
+      cancelled = true
+    }
+  }, [navigate])
 
   async function onSubmit(e) {
     e.preventDefault()
@@ -33,6 +58,17 @@ export default function LoginPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  if (checkingSession) {
+    return (
+      <div className="container">
+        <div className="card">
+          <h1>Login</h1>
+          <p className="muted">Verificando sesión...</p>
+        </div>
+      </div>
+    )
   }
 
   return (

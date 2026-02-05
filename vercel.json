@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://ai-finance-backend-pi85.onrender.com/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
