@@ -164,6 +164,17 @@ h2, h3 {
   align-items: center;
   justify-content: center;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+  .topbar .tab,
+  .topbar .button.secondary {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
 }
 
 .error {
