@@ -156,6 +156,16 @@ h2, h3 {
   border-color: rgba(17, 24, 39, 0.15);
 }
 
+.topbar .tab,
+.topbar .button.secondary {
+  font-size: 0.95rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .error {
   background: rgba(239, 68, 68, 0.1);
   color: #991b1b;
@@ -248,6 +258,7 @@ input[type='file'] {
   min-height: 44px;
   display: flex;
   align-items: center;
+  justify-content: center;
   touch-action: manipulation;
 }
 
