@@ -199,6 +199,7 @@ h2, h3 {
 
 input[type='file'] {
   max-width: 100%;
+  width: 100%;
 }
 
 .row > div {
