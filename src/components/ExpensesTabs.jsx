@@ -25,7 +25,7 @@ export default function ExpensesTabs() {
     setError(null)
     setLoading(true)
     try {
-      const data = await apiFetch('/expenses/', { method: 'GET' })
+      const data = await apiFetch('/expenses', { method: 'GET' })
       setExpenses(Array.isArray(data) ? data : [])
     } catch (err) {
       setError(err.message)
