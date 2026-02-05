@@ -99,6 +99,26 @@ export default function ReceiptUpload() {
     setDraft((prev) => prev.map((row, i) => (i === idx ? { ...row, ...patch } : row)))
   }
 
+  function duplicateRow(idx) {
+    setDraft((prev) => {
+      const row = prev[idx]
+      if (!row) return prev
+      const copy = {
+        amount: row.amount,
+        currency: row.currency,
+        description: row.description,
+        category: row.category,
+        expense_date: row.expense_date,
+        expense_date_display: row.expense_date_display,
+      }
+      return [...prev.slice(0, idx + 1), copy, ...prev.slice(idx + 1)]
+    })
+  }
+
+  function deleteRow(idx) {
+    setDraft((prev) => prev.filter((_, i) => i !== idx))
+  }
+
   async function onSave() {
     if (!result?.receipt_path) return
     setError(null)
@@ -193,6 +213,7 @@ export default function ReceiptUpload() {
                       <th>Monto</th>
                       <th>Moneda</th>
                       <th>Fecha</th>
+                      <th>Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -264,6 +285,21 @@ export default function ReceiptUpload() {
                               borderColor: e.expense_date_display && !isValidDate(e.expense_date_display) ? '#ff4444' : undefined
                             }}
                           />
+                        </td>
+                        <td>
+                          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                            <button className="tab" type="button" onClick={() => duplicateRow(idx)}>
+                              Duplicar
+                            </button>
+                            <button
+                              className="tab"
+                              type="button"
+                              onClick={() => deleteRow(idx)}
+                              style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: 'rgba(239, 68, 68, 0.35)' }}
+                            >
+                              Eliminar
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
