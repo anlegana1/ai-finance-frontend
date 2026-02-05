@@ -72,6 +72,14 @@ h2, h3 {
   flex-wrap: wrap;
 }
 
+.topbar h1 {
+  color: white;
+}
+
+.topbar .muted {
+  color: rgba(255, 255, 255, 0.75);
+}
+
 @media (max-width: 640px) {
   .topbar h1 {
     font-size: 1.5rem;
@@ -164,8 +172,33 @@ h2, h3 {
   display: flex;
   align-items: center;
   gap: 10px;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
+}
+
+.row > button {
+  flex: 1;
+  min-width: 0;
+}
+
+.row > .tab,
+.row > .button.secondary {
+  min-height: 44px;
+  padding: 10px 16px;
+}
+
+.row > .button.secondary {
+  border-radius: 999px;
+}
+
+@media (max-width: 640px) {
+  .row {
+    width: 100%;
+  }
+}
+
+input[type='file'] {
+  max-width: 100%;
 }
 
 .row > div {

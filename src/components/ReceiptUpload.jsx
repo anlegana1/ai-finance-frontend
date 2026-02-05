@@ -275,10 +275,6 @@ export default function ReceiptUpload() {
               </div>
             ) : null}
           </div>
-
-          <div className="muted" style={{ marginTop: '12px' }}>
-            receipt_path: {result.receipt_path}
-          </div>
         </div>
       ) : null}
     </div>
