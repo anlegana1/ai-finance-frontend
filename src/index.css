@@ -202,6 +202,28 @@ input[type='file'] {
   width: 100%;
 }
 
+.fileInputWrap {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.fileInputWrap input[type='file'] {
+  display: block;
+}
+
+.receiptPreviewHeader {
+  margin-bottom: 12px;
+}
+
+.receiptPreviewActions {
+  flex-wrap: wrap;
+}
+
+.receiptPreviewActions > button {
+  flex: 1;
+  min-width: 120px;
+}
+
 .row > div {
   display: flex;
   gap: 8px;

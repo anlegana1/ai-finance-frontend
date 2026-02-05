@@ -153,12 +153,14 @@ export default function ReceiptUpload() {
       <form onSubmit={onSubmit} className="form">
         <label className="label">
           Imagen
-          <input
-            className="input"
-            type="file"
-            accept="image/jpeg,image/png"
-            onChange={(e) => setFile(e.target.files?.[0] || null)}
-          />
+          <div className="fileInputWrap">
+            <input
+              className="input"
+              type="file"
+              accept="image/jpeg,image/png"
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
+            />
+          </div>
         </label>
 
         {error ? <div className="error">{error}</div> : null}
@@ -171,9 +173,9 @@ export default function ReceiptUpload() {
       {result ? (
         <div className="section">
           <div>
-            <div className="row" style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
+            <div className="row receiptPreviewHeader" style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
               <h3 style={{ margin: 0 }}>Preview de gastos (editable)</h3>
-              <div style={{ display: 'flex', gap: '8px' }}>
+              <div className="receiptPreviewActions" style={{ display: 'flex', gap: '8px' }}>
                 <button className="button" onClick={onDiscard} style={{ backgroundColor: '#dc2626' }}>
                   Descartar
                 </button>
