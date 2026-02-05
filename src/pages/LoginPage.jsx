@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { API_BASE_URL } from '../lib/api'
-import { setToken } from '../lib/auth'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -20,6 +19,7 @@ export default function LoginPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
+        credentials: 'include',
       })
 
       const data = await res.json().catch(() => null)
@@ -27,7 +27,6 @@ export default function LoginPage() {
         throw new Error(data?.detail || 'Login failed')
       }
 
-      setToken(data.access_token)
       navigate('/', { replace: true })
     } catch (err) {
       setError(err.message)

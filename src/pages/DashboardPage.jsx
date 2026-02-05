@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { clearToken } from '../lib/auth'
+import { apiFetch } from '../lib/api'
 import ReceiptUpload from '../components/ReceiptUpload'
 import ExpensesTabs from '../components/ExpensesTabs'
 
@@ -8,9 +8,14 @@ export default function DashboardPage() {
   const navigate = useNavigate()
   const [tab, setTab] = useState('receipt')
 
-  function logout() {
-    clearToken()
-    navigate('/login', { replace: true })
+  async function logout() {
+    try {
+      await apiFetch('/auth/logout', { method: 'POST' })
+    } catch {
+      // ignore
+    } finally {
+      navigate('/login', { replace: true })
+    }
   }
 
   return (
