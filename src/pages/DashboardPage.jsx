@@ -19,6 +19,7 @@ export default function DashboardPage() {
     } catch {
       // ignore
     } finally {
+      localStorage.removeItem('user')
       navigate('/login', { replace: true })
     }
   }

@@ -54,6 +54,7 @@ export default function LoginPage() {
         throw new Error(data?.detail || 'Login failed')
       }
 
+      localStorage.setItem('user', JSON.stringify(data))
       navigate('/', { replace: true })
     } catch (err) {
       setError(err.message)
@@ -108,6 +109,10 @@ export default function LoginPage() {
 
           <button className="button" type="submit" disabled={loading}>
             {loading ? t('login_loading') : t('login_button')}
+          </button>
+
+          <button className="button secondary" type="button" onClick={() => navigate('/register')}>
+            {t('login_register')}
           </button>
         </form>
       </div>

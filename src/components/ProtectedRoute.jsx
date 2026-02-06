@@ -8,8 +8,11 @@ export default function ProtectedRoute({ children }) {
   useEffect(() => {
     let mounted = true
     apiFetch('/auth/me')
-      .then(() => {
-        if (mounted) setStatus('ok')
+      .then((data) => {
+        if (mounted) {
+          localStorage.setItem('user', JSON.stringify(data))
+          setStatus('ok')
+        }
       })
       .catch(() => {
         if (mounted) setStatus('unauth')

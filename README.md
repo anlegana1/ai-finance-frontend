@@ -9,6 +9,7 @@ A modern React-based frontend application for managing personal finances with AI
 - **Receipt Upload**: AI-powered receipt scanning and data extraction
 - **Expense Management**: Track and categorize expenses with intuitive tabs
 - **Responsive Design**: Modern UI optimized for all devices
+- **Default Currency Preference**: Users choose `default_currency` (CAD/USD/COP) on registration; the UI enforces it for receipt expenses
 
 ## 🛠️ Tech Stack
 
@@ -119,6 +120,22 @@ Authentication uses an HttpOnly cookie instead of storing tokens in `localStorag
 - The browser sends the cookie automatically on subsequent API calls.
 - The frontend uses `credentials: 'include'` in `fetch`.
 - `ProtectedRoute` calls `GET /auth/me` to check if the user is authenticated.
+
+## 💱 Default currency preference
+
+The app supports a per-user default currency (`default_currency`) configured during registration.
+
+- **Registration**
+  - The `/register` page includes a selector for `default_currency`.
+  - Allowed values: `CAD`, `USD`, `COP`.
+
+- **Persistence (frontend)**
+  - After a successful login/session check, the frontend stores the user object in `localStorage` under the `user` key.
+  - `ProtectedRoute` also refreshes this value by calling `GET /auth/me`.
+
+- **Enforcement in the UI**
+  - In `ReceiptUpload`, the currency column is read-only and always uses `user.default_currency`.
+  - On save/confirm, expenses are submitted with `currency` forced to the user's default currency.
 
 ## 🌍 i18n (English/Spanish)
 

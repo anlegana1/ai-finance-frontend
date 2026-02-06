@@ -52,6 +52,8 @@ function isValidDate(displayDate) {
 
 export default function ReceiptUpload() {
   const t = useT()
+  const user = JSON.parse(localStorage.getItem('user') || '{}')
+  const userCurrency = String(user?.default_currency || 'CAD').toUpperCase()
   const [file, setFile] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -85,7 +87,7 @@ export default function ReceiptUpload() {
       setResult(data)
       setDraft((data.expenses_preview || []).map((x) => ({
         amount: x.amount,
-        currency: x.currency,
+        currency: userCurrency,
         description: x.description,
         category: x.category,
         expense_date: x.expense_date,
@@ -130,7 +132,7 @@ export default function ReceiptUpload() {
         receipt_path: result.receipt_path,
         expenses: draft.map((e) => ({
           amount: Number(e.amount),
-          currency: String(e.currency || 'CAD').toUpperCase(),
+          currency: userCurrency,
           description: String(e.description || '').trim(),
           category: String(e.category || 'OTHER').trim(),
           expense_date: e.expense_date || null,
@@ -245,16 +247,7 @@ export default function ReceiptUpload() {
                           />
                         </td>
                         <td>
-                          <select
-                            className="input"
-                            value={e.currency}
-                            onChange={(ev) => updateRow(idx, { currency: ev.target.value })}
-                            style={{ width: '90px' }}
-                          >
-                            <option value="CAD">CAD</option>
-                            <option value="COP">COP</option>
-                            <option value="USD">USD</option>
-                          </select>
+                          <input className="input" value={userCurrency} readOnly style={{ width: '90px' }} />
                         </td>
                         <td>
                           <input
