@@ -143,6 +143,36 @@ h2, h3 {
   cursor: pointer;
   min-height: 44px;
   touch-action: manipulation;
+  transition: transform 120ms ease, filter 120ms ease, background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+@media (hover: hover) {
+  .button:not(:disabled):hover {
+    filter: brightness(1.06);
+  }
+
+  .tab:not(:disabled):hover {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(17, 24, 39, 0.22);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  .button.secondary:not(:disabled):hover {
+    background: rgba(255, 255, 255, 0.55);
+    border-color: rgba(17, 24, 39, 0.22);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.button:not(:disabled):active,
+.tab:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.button:focus-visible,
+.tab:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.35);
 }
 
 .button:disabled {
@@ -271,6 +301,7 @@ input[type='file'] {
   align-items: center;
   justify-content: center;
   touch-action: manipulation;
+  transition: transform 120ms ease, filter 120ms ease, background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
 }
 
 .tab.active {
