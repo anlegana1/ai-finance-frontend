@@ -120,6 +120,19 @@ Authentication uses an HttpOnly cookie instead of storing tokens in `localStorag
 - The frontend uses `credentials: 'include'` in `fetch`.
 - `ProtectedRoute` calls `GET /auth/me` to check if the user is authenticated.
 
+## 🌍 i18n (English/Spanish)
+
+This frontend includes a lightweight i18n system (no external i18n library):
+
+- Default language: **English** (`en`)
+- Optional language: Spanish (`es`)
+- Language selection is persisted in `localStorage` (`ai_finance_lang`)
+
+Files involved:
+- `src/lib/i18n.jsx` (translation dictionary + `LanguageProvider` + hooks)
+- `src/main.jsx` (wraps the app with `LanguageProvider`)
+- UI text uses the `useT()` hook (e.g. `t('login_title')`)
+
 ## 📝 Available Scripts
 
 - `npm run dev` - Start development server

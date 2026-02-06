@@ -274,9 +274,9 @@ input[type='file'] {
 }
 
 .tab.active {
-  background: #111827;
+  background: #2563eb;
   color: white;
-  border-color: #111827;
+  border-color: #2563eb;
 }
 
 .grid {

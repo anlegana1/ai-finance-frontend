@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { apiFetch } from '../lib/api'
 import { formatDate } from '../lib/dateUtils'
+import { useT } from '../lib/i18n.jsx'
 
 function toDisplayDate(isoDate) {
   if (!isoDate || typeof isoDate !== 'string') return ''
@@ -50,6 +51,7 @@ function isValidDate(displayDate) {
 }
 
 export default function ReceiptUpload() {
+  const t = useT()
   const [file, setFile] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -66,7 +68,7 @@ export default function ReceiptUpload() {
     setDraft([])
 
     if (!file) {
-      setError('Selecciona una imagen (JPG/PNG).')
+      setError(t('receipt_upload_select_image_error'))
       return
     }
 
@@ -157,7 +159,7 @@ export default function ReceiptUpload() {
   }
 
   function onDiscard() {
-    const confirmed = window.confirm('¿Está seguro que no quiere procesar estos cargos?')
+    const confirmed = window.confirm(t('receipt_discard_confirm'))
     if (confirmed) {
       setResult(null)
       setDraft([])
@@ -168,11 +170,11 @@ export default function ReceiptUpload() {
 
   return (
     <div className="card">
-      <h2>Subir recibo</h2>
+      <h2>{t('receipt_upload_title')}</h2>
 
       <form onSubmit={onSubmit} className="form">
         <label className="label">
-          Imagen
+          {t('receipt_upload_image_label')}
           <div className="fileInputWrap">
             <input
               className="input"
@@ -186,7 +188,7 @@ export default function ReceiptUpload() {
         {error ? <div className="error">{error}</div> : null}
 
         <button className="button" disabled={loading || result !== null} type="submit">
-          {loading ? 'Procesando...' : 'Procesar recibo'}
+          {loading ? t('receipt_upload_processing') : t('receipt_upload_process')}
         </button>
       </form>
 
@@ -194,13 +196,13 @@ export default function ReceiptUpload() {
         <div className="section">
           <div>
             <div className="row receiptPreviewHeader" style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-              <h3 style={{ margin: 0 }}>Preview de gastos (editable)</h3>
+              <h3 style={{ margin: 0 }}>{t('receipt_preview_title')}</h3>
               <div className="receiptPreviewActions" style={{ display: 'flex', gap: '8px' }}>
                 <button className="button" onClick={onDiscard} style={{ backgroundColor: '#dc2626' }}>
-                  Descartar
+                  {t('receipt_discard')}
                 </button>
                 <button className="button" onClick={onSave} disabled={saving || !draft.length}>
-                  {saving ? 'Guardando...' : 'Guardar'}
+                  {saving ? t('receipt_saving') : t('receipt_save')}
                 </button>
               </div>
             </div>
@@ -208,12 +210,12 @@ export default function ReceiptUpload() {
                 <table className="table">
                   <thead>
                     <tr>
-                      <th>Descripción</th>
-                      <th>Categoría</th>
-                      <th>Monto</th>
-                      <th>Moneda</th>
-                      <th>Fecha</th>
-                      <th>Acciones</th>
+                      <th>{t('table_description')}</th>
+                      <th>{t('table_category')}</th>
+                      <th>{t('table_amount')}</th>
+                      <th>{t('table_currency')}</th>
+                      <th>{t('table_date')}</th>
+                      <th>{t('table_actions')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -276,7 +278,7 @@ export default function ReceiptUpload() {
                                 const iso = toISODate(value)
                                 updateRow(idx, { expense_date: iso, expense_date_display: undefined })
                               } else {
-                                alert('Fecha inválida. Use formato DD/MM/YYYY')
+                                alert(t('receipt_invalid_date'))
                                 updateRow(idx, { expense_date_display: '' })
                               }
                             }}
@@ -289,7 +291,7 @@ export default function ReceiptUpload() {
                         <td>
                           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                             <button className="tab" type="button" onClick={() => duplicateRow(idx)}>
-                              Duplicar
+                              {t('action_duplicate')}
                             </button>
                             <button
                               className="tab"
@@ -297,7 +299,7 @@ export default function ReceiptUpload() {
                               onClick={() => deleteRow(idx)}
                               style={{ background: 'rgba(239, 68, 68, 0.15)', borderColor: 'rgba(239, 68, 68, 0.35)' }}
                             >
-                              Eliminar
+                              {t('action_delete')}
                             </button>
                           </div>
                         </td>
@@ -309,7 +311,9 @@ export default function ReceiptUpload() {
 
             {saved ? (
               <div style={{ marginTop: '12px' }}>
-                <div className="muted">Guardado OK. Se crearon {saved.expenses_created?.length || 0} gastos.</div>
+                <div className="muted">
+                  {t('receipt_saved_ok', { count: saved.expenses_created?.length || 0 })}
+                </div>
               </div>
             ) : null}
           </div>

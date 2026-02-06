@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { apiFetch } from '../lib/api'
 import { formatDate } from '../lib/dateUtils'
+import { useT } from '../lib/i18n.jsx'
 
 function toLocalDateString(d) {
   const yyyy = d.getFullYear()
@@ -16,6 +17,7 @@ function startOfDay(d) {
 }
 
 export default function ExpensesTabs() {
+  const t = useT()
   const [period, setPeriod] = useState('day')
   const [expenses, setExpenses] = useState([])
   const [loading, setLoading] = useState(false)
@@ -70,39 +72,39 @@ export default function ExpensesTabs() {
   return (
     <div className="card">
       <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-        <h2 style={{ margin: 0 }}>Gastos</h2>
+        <h2 style={{ margin: 0 }}>{t('expenses_title')}</h2>
         <button className="button secondary" onClick={load} disabled={loading}>
-          {loading ? 'Cargando...' : 'Refrescar'}
+          {loading ? t('expenses_loading') : t('expenses_refresh')}
         </button>
       </div>
 
       <div className="tabs">
         <button className={period === 'day' ? 'tab active' : 'tab'} onClick={() => setPeriod('day')}>
-          Día
+          {t('expenses_period_day')}
         </button>
         <button className={period === 'week' ? 'tab active' : 'tab'} onClick={() => setPeriod('week')}>
-          Semana
+          {t('expenses_period_week')}
         </button>
         <button className={period === 'month' ? 'tab active' : 'tab'} onClick={() => setPeriod('month')}>
-          Mes
+          {t('expenses_period_month')}
         </button>
       </div>
 
       {error ? <div className="error">{error}</div> : null}
 
       <div className="muted" style={{ marginTop: '10px' }}>
-        Total: {total.toFixed(2)}
+        {t('expenses_total', { total: total.toFixed(2) })}
       </div>
 
       <div className="tableWrap" style={{ marginTop: '10px' }}>
         <table className="table">
           <thead>
             <tr>
-              <th>Fecha</th>
-              <th>Descripción</th>
-              <th>Categoría</th>
-              <th>Monto</th>
-              <th>Moneda</th>
+              <th>{t('table_date')}</th>
+              <th>{t('table_description')}</th>
+              <th>{t('table_category')}</th>
+              <th>{t('table_amount')}</th>
+              <th>{t('table_currency')}</th>
             </tr>
           </thead>
           <tbody>

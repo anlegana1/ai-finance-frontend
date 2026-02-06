@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { API_BASE_URL } from '../lib/api'
+import { useT } from '../lib/i18n.jsx'
 
 export default function LoginPage() {
   const navigate = useNavigate()
+  const t = useT()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [checkingSession, setCheckingSession] = useState(true)
@@ -64,8 +66,8 @@ export default function LoginPage() {
     return (
       <div className="container">
         <div className="card">
-          <h1>Login</h1>
-          <p className="muted">Verificando sesión...</p>
+          <h1>{t('login_title')}</h1>
+          <p className="muted">{t('session_checking')}</p>
         </div>
       </div>
     )
@@ -74,12 +76,12 @@ export default function LoginPage() {
   return (
     <div className="container">
       <div className="card">
-        <h1>Login</h1>
-        <p className="muted">Inicia sesión para subir recibos y ver tus gastos.</p>
+        <h1>{t('login_title')}</h1>
+        <p className="muted">{t('login_subtitle')}</p>
 
         <form onSubmit={onSubmit} className="form">
           <label className="label">
-            Email
+            {t('login_email')}
             <input
               className="input"
               value={email}
@@ -91,7 +93,7 @@ export default function LoginPage() {
           </label>
 
           <label className="label">
-            Password
+            {t('login_password')}
             <input
               className="input"
               value={password}
@@ -105,7 +107,7 @@ export default function LoginPage() {
           {error ? <div className="error">{error}</div> : null}
 
           <button className="button" type="submit" disabled={loading}>
-            {loading ? 'Entrando...' : 'Entrar'}
+            {loading ? t('login_loading') : t('login_button')}
           </button>
         </form>
       </div>
