@@ -9,6 +9,12 @@ export async function apiFetch(path, options = {}) {
     credentials: 'include',
   })
 
+  if (res.status === 401 && typeof window !== 'undefined') {
+    if (window.location?.pathname !== '/login') {
+      window.location.assign('/login')
+    }
+  }
+
   let data = null
   const contentType = res.headers.get('content-type') || ''
   if (contentType.includes('application/json')) {
