@@ -69,7 +69,7 @@ export default function ExpensesTabs() {
 
   return (
     <div className="card">
-      <div className="row">
+      <div className="row" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
         <h2 style={{ margin: 0 }}>Gastos</h2>
         <button className="button secondary" onClick={load} disabled={loading}>
           {loading ? 'Cargando...' : 'Refrescar'}

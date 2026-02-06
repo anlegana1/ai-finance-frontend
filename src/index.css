@@ -197,7 +197,7 @@ h2, h3 {
   flex-wrap: wrap;
 }
 
-.row > button {
+.topbar .row > button {
   flex: 1;
   min-width: 0;
 }
