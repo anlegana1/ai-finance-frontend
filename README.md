@@ -9,7 +9,7 @@ A modern React-based frontend application for managing personal finances with AI
 - **Receipt Upload**: AI-powered receipt scanning and data extraction
 - **Expense Management**: Track and categorize expenses with intuitive tabs
 - **Responsive Design**: Modern UI optimized for all devices
-- **Default Currency Preference**: Users choose `default_currency` (CAD/USD/COP) on registration; the UI enforces it for receipt expenses
+
 
 ## 🛠️ Tech Stack
 
